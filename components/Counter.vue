@@ -11,8 +11,13 @@ const counter = ref(props.count)
 </script>
 
 <template>
-  <div flex="~" w="min" border="~ gray-400 opacity-50 rounded-md">
+  <div
+    flex="~"
+    w="min"
+    border="~ gray-400 opacity-50 rounded-md"
+  >
     <button
+      type="button"
       border="r gray-400 opacity-50"
       p="2"
       font="mono"
@@ -22,8 +27,14 @@ const counter = ref(props.count)
     >
       -
     </button>
-    <span m="auto" p="2">{{ counter }}</span>
+    <span
+      m="auto"
+      p="2"
+    >
+      {{ counter }}
+    </span>
     <button
+      type="button"
       border="l gray-400 opacity-50"
       p="2"
       font="mono"

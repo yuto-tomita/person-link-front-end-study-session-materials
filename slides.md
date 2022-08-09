@@ -1,8 +1,11 @@
 ---
-theme: default
+theme: seriph
 class: text-lg, text-slate-900
 highlighter: shiki
+title: Personlink Frontend Study
+downlaod: true
 ---
+
 # Personlink Frontend Study
 
 Vue3とTypeScriptの雰囲気を知ろう
@@ -51,14 +54,14 @@ JavaScriptと違う点は、TypeScriptにはtsc(typescript compiler)を備えて
 
 ## メリット
 
-- 型安全に開発することができる
-- プログラム中に型を記述することによって、可読性が上がる
+- **型安全に開発することができる**(型によるバグが発生しづらい)
+- プログラム中に型を記述することによって、可読性が上がる(プログラムが読みやすくなる)
 - 入力補完がされるようになり、開発効率が上がる
 
 ## デメリット
 
 - 環境構築が面倒くさい
-- tsconfigの設定が多すぎて、よくわからなくなりがち
+- tsconfigの設定が多すぎて、よくわからなくなりがち(とりあえず`strict`は`true`にしておこう)
 - 最初のうちは型定義がめんどくさいと感じることがある
 
 
@@ -71,6 +74,7 @@ JavaScriptと違う点は、TypeScriptにはtsc(typescript compiler)を備えて
     margin-left: 30px;
   }
 </style>
+
 ---
 
 # TypeScriptの型基本
@@ -91,6 +95,9 @@ TypeScriptの型は、プリミティブとオブジェクトに大別されま�
 今回はBigInt, Symbolの説明はしませんので、もし気になったら各自で調べてみてください。
 
 <style>
+  .slidev-layout {
+    font-size: 0.9rem;
+  }
   .slidev-layout p {
     opacity: 1;
     margin-top: 30px;
@@ -138,7 +145,7 @@ const undefined: undefined = undefined
 
 型注釈デモ
 
-https://www.typescriptlang.org/play?#code/MYewdgzgLgBNBOAuOV4EswHMYF4YHIAzEEfAKFEljAFcBbZWugIwFN5cYBGC8aGZiQA2yQSCGsAhmE6FJQiKzJkgA
+https://www.typescriptlang.org/play?#code/MYewdgzgLgBAhgLhmArgWwEYFMBOMC8MAzAAwkBQoksGSqmuBMALGZeNDMEtDgJZgA5kwDkAVjIjy5APQyuHWBHR102PITgwA1DAyz5VCCAA2WAHQmQggBTK0ASmlyF1GPdUMN8HXt-AYFwArCEADBkALBkAKhkBLhkAfhkAZBkAvN0B8V0BtBkAtBkBrBkAvxUBspUBVBkAYhkAzBkB1BkA-BkAxBgNXYzNLazt0J2koAE8ABywYFDA+cFE4ERgAHxgRDCkjWF7+sABlODQOsyRZgcIRKXIzJSgcHn2BYU2AMxAQKV4mCl3kFXuvJgBGcnpRZ6k7jAuTJFO4CYIN1CACgVhyD9TExUCYTDssLA+n97nCYSg4W8+CYPl9ET0wAATLBrIlYU4CLCEpi9YkUsBU8i0kHjIbkIA
 
 <style>
   .slidev-layout h3 {
@@ -168,6 +175,7 @@ const obj: Obj = {
 }
 const str: string[] = []
 const num: number[] = []
+const objArray: Obj[] = []
 ```
 
 `interface`か`type`を使って、オブジェクトの型宣言ができます。
@@ -180,6 +188,10 @@ const num: number[] = []
   .slidev-layout h3 {
     margin: 15px 0;
   }
+  .slidev-layout {
+    font-size: 0.9rem;
+  }
+
 </style>
 
 ---
@@ -217,9 +229,16 @@ Vueがすごいのは、宣言的に見た目を構築していけるところ�
 
 # Vue + TSでの実装コードを見る
 
+<Todo />
+
 <style>
   .slidev-layout h1 {
     margin-bottom: 30px;
   }
 </style>
 ---
+
+
+TODO: 
+アンケートにご協力お願いします:man-bowing:
+明日アジェンダを公開する
