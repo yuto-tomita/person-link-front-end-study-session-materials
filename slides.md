@@ -1,385 +1,225 @@
 ---
-# try also 'default' to start simple
 theme: default
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: https://source.unsplash.com/collection/94734566/1920x1080
-# apply any windi css classes to the current slide
-class: 'text-center'
-# https://sli.dev/custom/highlighters.html
+class: text-lg, text-slate-900
 highlighter: shiki
-# show line numbers in code blocks
-lineNumbers: false
-# some information about the slides, markdown enabled
-info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
-# persist drawings in exports and build
-drawings:
-  persist: false
-# use UnoCSS (experimental)
-css: unocss
 ---
+# Personlink Frontend Study
 
-# Welcome to Slidev
-
-Presentation slides for developers
-
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
-</div>
-
-<div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub"
-    class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
-  </a>
-</div>
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
+Vue3とTypeScriptの雰囲気を知ろう
 
 ---
 
-# What is Slidev?
+# アジェンダ
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
-
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
+- TypeScriptとは？
+- TypeScriptメリット・デメリット
+- TypScript型基本
+- TypeScriptでの型定義の仕方
+- Vueとは
+- Vue + TSでの実装コードを見る
+- Vueを使う上でのTips
 
 <style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
+  ul {
+    margin-top: 2rem;
+    margin-left: 2rem;
+  }
+</style>
+---
+
+# TypeScriptとは？
+MicroSoftによって開発されているプログラミング言語の一つ。
+AltJS(Alternative Javascript)の一つです。
+
+
+AltJSとはJavaScriptの代替言語という意味で、現在はTypeScriptが主流でAltJSという言葉そのものを聞かなくなってしまいましたが、CoffeeScriptや、Dartなどが存在しています。
+
+TypeScriptの用途はJavaScriptと同じであり、サーバーサイド、フロントエンドと幅広く使うことができます。
+
+JavaScriptと違う点は、TypeScriptにはtsc(typescript compiler)を備えていて、プログラムによる型チェックが行われるようになります。
+型チェックが行われることによって、型に関連されるプログラムはコンパイルエラーとして検出されるようになります。
+
+<style>
+  .slidev-layout p {
+    opacity: 1;
+    margin-top: 30px;
+  }
+</style>
+---
+
+# TypeScriptのメリット・デメリット
+
+## メリット
+
+- 型安全に開発することができる
+- プログラム中に型を記述することによって、可読性が上がる
+- 入力補完がされるようになり、開発効率が上がる
+
+## デメリット
+
+- 環境構築が面倒くさい
+- tsconfigの設定が多すぎて、よくわからなくなりがち
+- 最初のうちは型定義がめんどくさいと感じることがある
+
+
+<style>
+  .slidev-layout h2 {
+    margin-top: 30px;
+  }
+
+  ul {
+    margin-left: 30px;
+  }
+</style>
+---
+
+# TypeScriptの型基本
+
+TypeScriptの型は、プリミティブとオブジェクトに大別されます。
+
+### プリミティブ
+プリミティブには、**最も基本的な値**を表す用語として使用されているらしく、現状下記の種類の型が存在します。
+
+- 文字列(string)
+- 数値(number)
+- 真偽値(boolean)
+- BigInt
+- null
+- undefined
+- Symbol
+
+今回はBigInt, Symbolの説明はしませんので、もし気になったら各自で調べてみてください。
+
+<style>
+  .slidev-layout p {
+    opacity: 1;
+    margin-top: 30px;
+  }
+
+  ul {
+    margin-left: 30px;
+  }
+</style>
+---
+
+# TypeScriptの型基本
+
+### オブジェクト
+TypeScriptのオブジェクトは**いくつかの値をまとめたデータ**です。
+
+```ts
+const obj = {
+  foo: 1,
+  bar: 'bar'
 }
+```
+
+上記のように、`{key: value}` 形式で記述することで、値をひとまとめにすることができます。
+オブジェクトの一つ一つ中身の値のことを**プロパティ**と呼んだりします。
+
+TypeScriptはプリミティブ型とオブジェクト型に分類されるため、配列もオブジェクトの一つです。
+配列の一つ一つ中身の値のことを**要素**と呼んだりします。
+---
+
+# TypeScriptでの型定義の仕方
+
+### プリミティブ
+
+```ts
+const str: string = 'foo'
+const num: number = 1
+const bool: boolean = false
+const nil: null = null
+const undefined: undefined = undefined
+```
+
+コロンの後に型を記述することができる。**型注釈**とも呼ばれます。
+型注釈を記述することによって、その型以外の値の代入ができなくなります。
+
+型注釈デモ
+
+https://www.typescriptlang.org/play?#code/MYewdgzgLgBNBOAuOV4EswHMYF4YHIAzEEfAKFEljAFcBbZWugIwFN5cYBGC8aGZiQA2yQSCGsAhmE6FJQiKzJkgA
+
+<style>
+  .slidev-layout h3 {
+    margin-top: 30px;
+  }
 </style>
 
 ---
 
-# Navigation
+# TypeScriptでの型定義の仕方
+### オブジェクト
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
-
-### Keyboard Shortcuts
-
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
-
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
----
-layout: image-right
-image: https://source.unsplash.com/collection/94734566/1920x1080
----
-
-# Code
-
-Use code snippets and get the highlighting directly![^1]
-
-```ts {all|2|1-6|9|all}
-interface User {
-  id: number
-  firstName: string
-  lastName: string
-  role: string
+```ts
+type Obj = {
+  foo: string
+  bar: number
 }
 
-function updateUser(id: number, update: User) {
-  const user = getUser(id)
-  const newUser = { ...user, ...update }
-  saveUser(id, newUser)
+interface Obj {
+  foo: string
+  bar: number
 }
+
+const obj: Obj = {
+  foo: 'foo',
+  bar: 1
+}
+const str: string[] = []
+const num: number[] = []
 ```
 
-<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
+`interface`か`type`を使って、オブジェクトの型宣言ができます。
 
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
+昔のバージョンでは、`interface`でしかオブジェクトの型宣言ができませんでしたが、`type`でも型宣言を行うことができます。
+
+`type`の方が型宣言においてできることが多く、プロジェクトによっては、型宣言は`type`のみを使うところもあるそうです。
 
 <style>
-.footnotes-sep {
-  @apply mt-20 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
+  .slidev-layout h3 {
+    margin: 15px 0;
+  }
 </style>
 
 ---
 
-# Components
+# Vueとは 
 
-<div grid="~ cols-2 gap-4">
-<div>
+ユーザーインターフェース(ページの見た目)を構築するためのフレームワークです。
 
-You can use Vue components directly inside your slides.
+HTMLで見た目を記述し、JavaScriptを使ってサイトに動きをつけていきます。
 
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
+Vueがすごいのは、宣言的に見た目を構築していけるところにあります。
 
-```html
-<Counter :count="10" />
+`button`等のUIに対して下記のように、直接実現したいことを記述することで、その処理を行うことができます。
+
+```vue
+<button @click="alert('click')">
+  click me
+</button>
 ```
 
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
+<SampleButton />
 
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="-t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-preload: false
----
-
-# Animations
-
-Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }">
-  Slidev
-</div>
-```
-
-<div class="w-60 relative mt-6">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-square.png"
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-circle.png"
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-triangle.png"
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
+<style>
+  .slidev-layout p {
+    opacity: 1;
   }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 40, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
-
-<br>
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-3 gap-10 pt-4 -mb-6">
-
-```mermaid {scale: 0.5}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
+  .slidev-layout h1 {
+    margin-bottom: 30px;
   }
-  frame "Foo" {
-    [Frame 4]
+  .slidev-layout button {
+    margin-top: 30px;
   }
-}
-
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
-
-
----
-layout: center
-class: text-center
+</style>
 ---
 
-# Learn More
+# Vue + TSでの実装コードを見る
 
-[Documentations](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
+<style>
+  .slidev-layout h1 {
+    margin-bottom: 30px;
+  }
+</style>
+---
