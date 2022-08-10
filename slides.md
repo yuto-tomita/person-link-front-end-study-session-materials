@@ -4,6 +4,7 @@ class: text-lg, text-slate-900
 highlighter: shiki
 title: Personlink Frontend Study
 downlaod: true
+favicon: './public/personlink-logo.png'
 ---
 
 # Personlink Frontend Study
@@ -278,4 +279,9 @@ Vueがすごいのは、宣言的に見た目を構築していけるところ�
 - https://github.com/yuto-tomita/vue3-ts-todo
 - https://github.com/yuto-tomita/person-link-front-end-study-session-materials
 
+<style>
+  h1 {
+    margin-top: 30px;
+  }
+</style>
 ---
