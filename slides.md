@@ -1,5 +1,5 @@
 ---
-theme: seriph
+theme: default
 class: text-lg, text-slate-900
 highlighter: shiki
 title: Personlink Frontend Study
@@ -277,8 +277,5 @@ Vueがすごいのは、宣言的に見た目を構築していけるところ�
 # 勉強会のために作成したリポジトリ
 - https://github.com/yuto-tomita/vue3-ts-todo
 - https://github.com/yuto-tomita/person-link-front-end-study-session-materials
-- 
+
 ---
-TODO: 
-アンケートにご協力お願いします:man-bowing:
-明日アジェンダを公開する
