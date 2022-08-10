@@ -3,10 +3,23 @@
   - componentのimport時にcomponentsプロパティが必要ない
   definePropsでpropsの定義ができる。interfaceの定義でpropsが登録できる等々たくさん -->
 <script setup lang="ts">
+// setup() {
+//   ...
+
+//   return {
+//     ...
+//   }
+// }
+// props: {
+//   msg: {
+//     type: String,
+//     required: true
+//   }
+// }
 import { reactive, ref } from 'vue'
 import Input from './ui/Input/InputUi.vue'
 import Button from './ui/Button/ButtonUi.vue'
-import TodoList from './todo/TodoList/TodoList.vue'
+import TodoList from './todo/List/TodoList.vue'
 import {
   Todo,
   TodoForm,
@@ -15,8 +28,9 @@ import {
 } from './todo/types'
 
 // reactiveを使用することでリアクティブに動作するようになる。refと違う点はvue2のdataプロパティのように記述できる点と、分割代入をすることでリアクティブ性が失われる点、reactiveに動作させるための内部ロジックが違う
+// コンポーネントのネストでもリアクティブ性が失われるので、扱いが難しい
 const todoForm = reactive<TodoForm>({
-  todo: 'aaa'.repeat(50),
+  todo: 'aaa',
   status: Status.PROGRESS
 })
 
@@ -121,21 +135,24 @@ const updateTodoValue = (event: { todo: string, id: number }) => {
 
       <!-- 子コンポーネントでmodelValueという値を受け取るように記述しているため、親コンポーネントでv-modelで管理できるようになる -->
       <!-- 親コンポーネントでv-model管理のメリットとして、データフローが追いやすくなる、データ管理の容易さ、簡潔にかけると言ったメリットがある -->
+      <!-- :model-value="OO" @update:modelValue="OO" -->
       <Input
         v-model="todoForm.todo"
         class="w-full"
         :error-message="error['todo']"
       />
     </div>
+    <!-- 双方向データバインディングの例(Inputに入力されている値が連動して画面に表示されている) -->
+    <!-- {{ todoForm.todo }} -->
 
     <div class="ml-2">
+      <!-- @* はv-on:* のショートハンド記法　子コンポーネント側でemitしたイベントを発火させることができる -->
+      <!-- 子コンポーネントでの、×アイコンをクリックした時に、TODOを消す処理を発火させる -->
       <Button @click="saveTodo">
         投稿
       </Button>
     </div>
   </div>
-  <!-- @* はv-on:* のショートハンド記法　子コンポーネント側でemitしたイベントを発火させることができる -->
-  <!-- 子コンポーネントでの、×アイコンをクリックした時に、TODOを消す処理を発火させる -->
   <TodoList
     :todo-list="todos"
     @on-delete="deleteTodo"
@@ -166,3 +183,5 @@ const updateTodoValue = (event: { todo: string, id: number }) => {
 <!-- computedは結果をキャッシュするという特性を持っています。一回実行して、算出された値が同じならば関数を再実行しないでそのまま値を返します。 -->
 
 <!-- 対してMethodsは呼ばれるごとに関数を実行させてしまいます。これはパフォーマンス上良くないです。実行する必要がないのに実行させてるわけですから。 -->
+
+<!-- <style scoped lang="scss"></style> -->
