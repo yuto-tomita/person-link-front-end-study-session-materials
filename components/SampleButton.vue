@@ -9,7 +9,36 @@ function onClick() {
 // const sum: number = a + b // 3
 // const sum = a + b + c // 700500
 // type union = 'a' | 'b'
-// const a: union = 'a'
+// const a: union = 'b'
+// type Obj = {
+//   readonly foo: string
+//   readonly bar: number
+// }
+// // let obj: Obj = Object.create({})
+// const obj: Obj = {
+//   foo: '',
+//   bar: 0
+// }
+// const str = 'a'
+// str = 'i'
+// obj.bar = 1
+
+// const ary: string[] = ['a', 'i', 'u']
+// console.log(ary[3]) //undefined
+
+// プロパティアクセス
+// console.log(obj.foo) // 'aaa' string
+// console.log(obj.bar) // 0 number
+// obj.foo = 'iii'
+
+
+// const test: Obj[] = [
+//   {
+//     foo: 'aaa',
+//     bar: 0
+//   },
+// ]
+// const test: string[] = ['a', 'b', 0]
 </script>
 
 <template>

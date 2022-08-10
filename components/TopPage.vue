@@ -3,6 +3,7 @@
   - componentのimport時にcomponentsプロパティが必要ない
   definePropsでpropsの定義ができる。interfaceの定義でpropsが登録できる等々たくさん -->
 <script setup lang="ts">
+
 // setup() {
 //   ...
 
@@ -16,7 +17,7 @@
 //     required: true
 //   }
 // }
-import { reactive, ref } from 'vue'
+import { reactive, ref, computed, ErrorCodes } from 'vue'
 import Input from './ui/Input/InputUi.vue'
 import Button from './ui/Button/ButtonUi.vue'
 import TodoList from './todo/List/TodoList.vue'
@@ -39,10 +40,9 @@ const todos = ref<Todo[]>([])
 const error = ref<TodoErrorMessage>({
   todo: ''
 })
-
 // ジェネリクスに型を指定することができる
 // 当然stringで指定しているため、string以外の型を代入することができない
-// const test = ref<string>('')
+const test = ref<string>('aaaa')
 
 // 型を記述しなくても簡単な型ならtypescriptの型推論が働いてstring型が自動的に割り振られる
 // const test = ref('')
@@ -79,7 +79,7 @@ const saveTodo = () => {
     todos.value.push({
       id: todos.value.length + 1,
       todo: todoForm.todo,
-      status: todoForm.status
+      status: todoForm.status,
     })
   }
 
@@ -125,6 +125,19 @@ const updateTodoValue = (event: { todo: string, id: number }) => {
     todo: event.todo
   }
 }
+
+const methodsRumdom = () => {
+  return Math.random()
+}
+
+const computedRumdom = computed(() => Math.random())
+
+// const getErrorMessage = () => {
+//   return error.value.todo
+// }
+const getErrorMessage = computed(() => {
+  return error.value.todo
+})
 </script>
 
 <!-- templateに記述されているHTMLはVueのRender関数によってVNode(Virtual Node(仮想DOM))を生成し、DOMに変換される -->
@@ -139,7 +152,7 @@ const updateTodoValue = (event: { todo: string, id: number }) => {
       <Input
         v-model="todoForm.todo"
         class="w-full"
-        :error-message="error['todo']"
+        :error-message="getErrorMessage"
       />
     </div>
     <!-- 双方向データバインディングの例(Inputに入力されている値が連動して画面に表示されている) -->
@@ -159,7 +172,21 @@ const updateTodoValue = (event: { todo: string, id: number }) => {
     @on-complete="switchTodoStatus"
     @on-update="updateTodoValue"
   />
+  {{ computedRumdom }}<br>
+  {{ computedRumdom }}<br>
+  {{ computedRumdom }}<br>
+  {{ computedRumdom }}<br>
+  <br>
+  <br>
+  {{ methodsRumdom() }}<br>
+  {{ methodsRumdom() }}<br>
+  {{ methodsRumdom() }}<br>
+  {{ methodsRumdom() }}<br>
 </template>
+
+
+<style scoped lang="lang">
+</style>
 
 <!-- Vueでtemplateを書いていく上でのアンチパターン -->
 

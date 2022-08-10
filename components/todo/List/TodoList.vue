@@ -7,7 +7,6 @@ import Input from '../../ui/Input/InputUi.vue'
 interface TodoListProps {
 	todoList: Todo[]
 }
-
 const props = defineProps<TodoListProps>()
 // emitsの型指定
 // onDeleteイベントを発火するにはnumber型のidプロパティが必要になる
