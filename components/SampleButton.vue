@@ -7,7 +7,7 @@ function onClick() {
 // const c: string = '500'
 
 // const sum: number = a + b // 3
-// const sum = a + b + c // 300400500
+// const sum = a + b + c // 700500
 // type union = 'a' | 'b'
 // const a: union = 'a'
 </script>

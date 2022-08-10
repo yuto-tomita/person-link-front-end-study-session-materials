@@ -4,9 +4,9 @@ import './index.css'
 
 interface ButtonUiProps {
   // 'primary' | 'danger'と記載することで'primary'か'danger'という値しか渡せないようになる
-  variant?: 'primary' | 'danger'
+  variant: 'primary' | 'danger'
 }
-
+// defineProps<ButtonUiProps>()
 withDefaults(defineProps<ButtonUiProps>(), {
   variant: 'primary'
 })
@@ -25,6 +25,7 @@ const onClick = () => {
     :class="`${variant} rounded border border-solid py-1 px-5`"
     @click="onClick"
   >
+    <!-- 親側で自由にボタンの中身の文言やスタイルを当てられるようにできるもの -->
     <slot />
   </button>
 </template>
