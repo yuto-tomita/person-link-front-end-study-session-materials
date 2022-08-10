@@ -215,6 +215,8 @@ Vueがすごいのは、宣言的に見た目を構築していけるところ�
 
 <SampleButton />
 
+<Counter />
+
 <style>
   .slidev-layout p {
     opacity: 1;
